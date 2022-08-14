@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Start Page{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <div class="container space-x-4 space-y-4">
+        <div class="text-4xl">This is {{ user.username }}'s Start Page</div>
+        <div class="text-sm"><a href="{% url 'logout' %}">Log out</a></div>
+            <div>
+            {% for object in object_list %}
+                <div>
+                    <div>{{ object.name }}</div>
+                    <div>{{ object.description }})</div>
+
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    {% for group in object.bookmark_groups.all %}
+                        <div class="border-solid border-2 border-red-300 space-y-2">
+                            <div class="text-center">{{ group.name }}</div>
+                                {% for bookmark in group.bookmarks.all %}
+                                    <div class="border-solid border-2 text-center"><a href="{{ bookmark.url }}">{{ bookmark.name }}</a></div>
+                                {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <div>
+
+                </div>
+
+        </div>
+
+        {% empty %}
+
+        <div>No objects yet.</div>
+
+        {% endfor %}
+
+    </div>
+
+
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
+{% endblock %}
+
