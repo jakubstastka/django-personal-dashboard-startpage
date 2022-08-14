@@ -1,2 +1,6 @@
 .idea/
 db.sqlite3
+startpage/settings.py
+__pycache__/
+*.pyc
+static/
