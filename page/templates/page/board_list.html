@@ -19,7 +19,7 @@
                         <div class="space-y-2">
                             <div class="bg-gray-600 text-center text-white text-xl">{{ group.name }}</div>
                                 {% for bookmark in group.bookmarks.all %}
-                                    <div class="bg-gray-400 hover:bg-emerald-400 text-center pt-1 pb-1"><a href="{{ bookmark.url }}">{{ bookmark.name }}</a></div>
+                                    <div class="bg-gray-400 hover:bg-emerald-400 text-center pt-1 pb-1"><a href="{{ bookmark.url }}" target="_blank">{{ bookmark.name }}</a></div>
                                 {% endfor %}
                         </div>
                     {% endfor %}
