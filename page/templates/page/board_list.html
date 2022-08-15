@@ -11,15 +11,15 @@
             <div>
             {% for object in object_list %}
                 <div>
-                    <div class="text-2xl">{{ object.name }}</div>
-                    <div>{{ object.description }}</div>
+                    <div class="text-2xl font-bold text-emerald-600">{{ object.name }}</div>
+                    <div class="italic font-light">{{ object.description }}</div>
 
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    <div class="grid grid-cols-1 pt-4 gap-6 md:grid-cols-2 lg:grid-cols-4">
                     {% for group in object.bookmark_groups.all %}
                         <div class="space-y-2">
-                            <div class="bg-gray-600 text-center text-white text-xl">{{ group.name }}</div>
+                            <div class="bg-emerald-600 rounded-lg text-center text-white text-xl">{{ group.name }}</div>
                                 {% for bookmark in group.bookmarks.all %}
-                                    <div class="bg-gray-400 hover:bg-emerald-400 text-center pt-1 pb-1"><a href="{{ bookmark.url }}" target="_blank">{{ bookmark.name }}</a></div>
+                                    <div class="bg-gray-300 rounded-lg hover:bg-emerald-400 text-center pt-1 pb-1"><a href="{{ bookmark.url }}" target="_blank">{{ bookmark.name }}</a></div>
                                 {% endfor %}
                         </div>
                     {% endfor %}
