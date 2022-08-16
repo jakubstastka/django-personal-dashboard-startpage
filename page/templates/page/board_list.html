@@ -6,13 +6,16 @@
 
 {% if user.is_authenticated %}
     <div class="container space-y-2">
-        <div class="text-4xl">This is {{ user.username }}'s Start Page</div>
-        <div class="text-sm"><a href="{% url 'logout' %}">Log out</a></div>
-            <div>
+        <div class="text-4xl text-center">{{ user.username }}'s Start Page</div>
+        <div class="text-sm text-right"><a href="{% url 'logout' %}">Log out</a></div>
+            <div class="space-y-4">
             {% for object in object_list %}
-                <div>
+
+                <div class="border-dashed border-2 rounded-lg border-emerald-600">
+                <div class="container px-5 py-2">
                     <div class="text-2xl font-bold text-emerald-600">{{ object.name }}</div>
                     <div class="italic font-light">{{ object.description }}</div>
+                    <div class="text-sm">Add New Group</div>
 
                     <div class="grid grid-cols-1 pt-4 gap-6 md:grid-cols-2 lg:grid-cols-4">
                     {% for group in object.bookmark_groups.all %}
@@ -20,20 +23,30 @@
                             <div class="p-1 bg-emerald-600 rounded-lg text-center text-white text-xl">{{ group.name }}</div>
                                 {% for bookmark in group.bookmarks.all %}
                                     <div class="flex space-x-2 justify-center"><a href="{{ bookmark.url }}" target="_blank"><button type="button" class="inline-block px-6 py-2.5 bg-gray-400 text-white font-medium text-sm leading-tight rounded-lg hover:bg-emerald-300">{{ bookmark.name }}</button></a></div>
-                                    <!-- div class="bg-gray-300 rounded-lg hover:bg-emerald-400 text-center pt-1 pb-1"><a href="{{ bookmark.url }}" target="_blank">{{ bookmark.name }}</a></div> -->
                                 {% endfor %}
                         </div>
                     {% endfor %}
                     <div>
-
                 </div>
+            </div>
+        </div>
         </div>
 
         {% empty %}
 
-        <div>No objects yet.</div>
+        <div class="border-dashed border-2 rounded-lg border-gray-600">
+            <div class="container px-5 py-2">
+                <div class="p-1 bg-gray-200 rounded-lg text-center text-gray-600 text-xl">Add New Board</div>
+            </div>
+        </div>
 
         {% endfor %}
+
+        <div class="border-dashed border-2 rounded-lg border-gray-600">
+            <div class="container px-5 py-2">
+                <div class="p-1 bg-gray-200 rounded-lg text-center text-gray-600 text-xl">Add New Board</div>
+            </div>
+        </div>
 
     </div>
 
