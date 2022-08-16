@@ -16,7 +16,7 @@ class BoardList(LoginRequiredMixin, ListView):
         return queryset
 
 
-class BoardCreateView(CreateView):
+class BoardCreateView(LoginRequiredMixin, CreateView):
     model = Board
     fields = ['name']
     success_url = reverse_lazy('home')
@@ -30,8 +30,9 @@ class BoardCreateView(CreateView):
 class BoardUpdateView(LoginRequiredMixin, UpdateView):
     model = Board
     fields = ['name']
+    success_url = reverse_lazy('home')
 
 
-class BoardDeleteView(DeleteView):
+class BoardDeleteView(LoginRequiredMixin, DeleteView):
     model = Board
     success_url = reverse_lazy('home')
