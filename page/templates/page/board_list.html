@@ -15,6 +15,7 @@
                 <div class="container px-5 py-2">
                     <div class="text-2xl font-bold text-emerald-600">{{ object.name }}</div>
                     <div class="italic font-light">{{ object.description }}</div>
+                    <div class="text-sm"><a href="{% url 'delete-board' object.pk %}">Delete Board</a></div>
                     <div class="text-sm">Add New Group</div>
 
                     <div class="grid grid-cols-1 pt-4 gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -58,4 +59,3 @@
 {% endif %}
 
 {% endblock %}
-

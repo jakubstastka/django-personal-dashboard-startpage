@@ -30,3 +30,8 @@ class BoardCreateView(CreateView):
 class BoardUpdateView(LoginRequiredMixin, UpdateView):
     model = Board
     fields = ['name']
+
+
+class BoardDeleteView(DeleteView):
+    model = Board
+    success_url = reverse_lazy('home')
