@@ -47,6 +47,11 @@ class BookmarkGroupCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+class BookmarkGroupDeleteView(LoginRequiredMixin, DeleteView):
+    model = BookmarkGroup
+    success_url = reverse_lazy('home')
+
+
 class BookmarkCreateView(LoginRequiredMixin, CreateView):
     model = Bookmark
     fields = ['name', 'url']
@@ -55,3 +60,8 @@ class BookmarkCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.bookmark_group = BookmarkGroup.objects.get(pk=self.kwargs["pk"])
         return super().form_valid(form)
+
+
+class BookmarkDeleteView(LoginRequiredMixin, DeleteView):
+    model = Bookmark
+    success_url = reverse_lazy('home')
