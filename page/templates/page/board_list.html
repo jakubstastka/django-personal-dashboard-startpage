@@ -17,7 +17,7 @@
                     <div class="italic font-light">{{ object.description }}</div>
                     <div class="text-sm"><a href="{% url 'update-board' object.pk %}">Update Board</a></div>
                     <div class="text-sm"><a href="{% url 'delete-board' object.pk %}">Delete Board</a></div>
-                    <div class="text-sm">Add New Group</div>
+                    <div class="text-sm"><a href="{% url 'add-board-group' object.pk %}">Add New Group</a></div>
 
                     <div class="grid grid-cols-1 pt-4 gap-6 md:grid-cols-2 lg:grid-cols-4">
                     {% for group in object.bookmark_groups.all %}
@@ -26,7 +26,7 @@
                                 {% for bookmark in group.bookmarks.all %}
                                     <div class="flex space-x-2 justify-center"><a href="{{ bookmark.url }}" target="_blank"><button type="button" class="inline-block px-4 py-2 bg-gray-400 text-white font-medium text-sm leading-tight rounded-lg hover:bg-emerald-300">{{ bookmark.name }}</button></a></div>
                                 {% endfor %}
-                                <div class="flex space-x-2 justify-center"><a href="#"><button type="button" class="inline-block px-2 py-1 bg-gray-400 text-white font-light text-sm leading-tight rounded-lg hover:bg-emerald-300">+</button></a></div>
+                                <div class="flex space-x-2 justify-center"><a href="{% url 'add-bookmark' group.id %}"><button type="button" class="inline-block px-2 py-1 bg-gray-400 text-white font-light text-sm leading-tight rounded-lg hover:bg-emerald-300">+</button></a></div>
                         </div>
                     {% endfor %}
                     <div>
