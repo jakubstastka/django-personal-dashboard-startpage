@@ -1,16 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <div class="form-group">
-         <form method="post">
+{% extends 'base.html' %}
+{% block title %}Board{% endblock %}
+{% block content %}
+
+    <div class="text-4xl text-center text-gray-600 pt-6">
+        {% if object.name %}
+            Change Group {{ object.name }}
+        {% else %}
+            Create New Board
+        {% endif %}
+        </div>
+
+        <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="" name="thread_submit">Send</button>
+            <div class="space-y-2 text-center pt-6">
+                <div class="flex flex-col items-center justify-center">
+                    <div><input type="name" class="text-center block mb-2 text-md font-medium text-gray-900 dark:text-gray-300" name="name" placeholder="Board Name" required></div>
+                </div>
+                <button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Save</button>
+            </div>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}
