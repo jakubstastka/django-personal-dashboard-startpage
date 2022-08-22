@@ -2,13 +2,14 @@
 <html>
 <head>
   <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/1846128011.js" crossorigin="anonymous"></script>
   <title>{% block title %}{% endblock %}</title>
 </head>
 <body class="bg-gray-200">
   <main>
-  <div class="lg:container lg:mx-auto lg:w-3/4">
+  <div class="container mx-auto w-3/4">
     {% block content %}
     {% endblock %}
   </div>
