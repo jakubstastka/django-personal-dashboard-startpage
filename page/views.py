@@ -1,4 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.db.models import Count
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from .models import Board, BookmarkGroup, Bookmark
@@ -14,6 +16,14 @@ class BoardList(LoginRequiredMixin, ListView):
         queryset = super().get_queryset()
         queryset = queryset.filter(user=self.request.user)
         return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_bookmarks_count = User.objects.filter(username=self.request.user.username).annotate(total=Count('boards__bookmark_groups__bookmarks'))
+
+        context['user_bookmarks_count'] = user_bookmarks_count.first().total
+
+        return context
 
 
 class BoardCreateView(LoginRequiredMixin, CreateView):

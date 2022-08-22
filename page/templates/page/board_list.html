@@ -8,7 +8,7 @@
 
     <div>
         <div class="text-4xl text-center text-gray-600">{{ user.username }}'s Start Page</div>
-        <p class="text-sm text-right text-gray-600"><a href="{% url 'password_change' %}">Change Password</a> | <a href="{% url 'logout' %}">Log out</a></p>
+        <p class="text-sm text-right text-gray-600"> Total bookmarks: {{ user_bookmarks_count }} | <a href="{% url 'password_change' %}">Change Password</a> | <a href="{% url 'logout' %}">Log out</a></p>
             <div class="space-y-4">
             {% for object in object_list %}
 
