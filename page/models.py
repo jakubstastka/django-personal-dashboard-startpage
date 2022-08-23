@@ -4,7 +4,7 @@ from .mixins import Positioned, Timestamped, Named
 
 
 class Board(Positioned, Timestamped, Named):
-    description = models.TextField(default="")
+    description = models.TextField(default="", blank=True)
     user = models.ForeignKey(User, related_name="boards", on_delete=models.CASCADE)
 
     @property
