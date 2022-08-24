@@ -1,7 +1,8 @@
 <nav class="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500 rounded-lg shadow-lg">
   <div class="container-fluid w-full flex flex-wrap items-justify justify-between px-6">
     <div class="container-fluid">
-        <a class="text-xl text-black" href="{% url 'home' %}">Start Page</a>
+        <span><a class="text-2xl font-extrabold text-black" href="{% url 'home' %}">Start Page</a></span>
+        <span class="text-xs text-gray-800 font-light">Your gateway to the Internet</span>
     </div>
       <div>
           <button class="text-black font-small rounded-lg text-sm text-center inline-flex items-center" type="button" data-dropdown-toggle="dropdown">{{ user.username }} <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
