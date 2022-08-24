@@ -1,0 +1,16 @@
+<nav class="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500 rounded-lg shadow-lg">
+  <div class="container-fluid w-full flex flex-wrap items-justify justify-between px-6">
+    <div class="container-fluid">
+      <a class="text-xl text-black" href="{% url 'home' %}">Start Page</a>
+    </div>
+      <div>
+          Logged in: {{ user.username }}
+      </div>
+      <div>
+          <a href="{% url 'password_change' %}">Change Password</a>
+      </div>
+      <div>
+          <a href="{% url 'logout' %}">Log out</a>
+      </div>
+  </div>
+</nav>
