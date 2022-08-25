@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.db.models import Count
@@ -90,17 +91,21 @@ class BookmarkDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('home')
 
 
+@login_required
 def hide_board(request, pk):
-    board = Board.objects.get(id=pk)
-    board.hidden = True
-    board.save()
+    user_board = Board.objects.filter(user=request.user).get(id=pk)
+    if user_board:
+        user_board.hidden = True
+        user_board.save()
 
     return redirect('home')
 
 
+@login_required
 def unhide_board(request, pk):
-    board = Board.objects.get(id=pk)
-    board.hidden = False
-    board.save()
+    user_board = Board.objects.filter(user=request.user).get(id=pk)
+    if user_board:
+        user_board.hidden = False
+        user_board.save()
 
     return redirect('home')
