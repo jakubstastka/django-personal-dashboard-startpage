@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.db.models import Count
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from .models import Board, BookmarkGroup, Bookmark
@@ -87,3 +88,19 @@ class BookmarkUpdateView(LoginRequiredMixin, UpdateView):
 class BookmarkDeleteView(LoginRequiredMixin, DeleteView):
     model = Bookmark
     success_url = reverse_lazy('home')
+
+
+def hide_board(request, pk):
+    board = Board.objects.get(id=pk)
+    board.hidden = True
+    board.save()
+
+    return redirect('home')
+
+
+def unhide_board(request, pk):
+    board = Board.objects.get(id=pk)
+    board.hidden = False
+    board.save()
+
+    return redirect('home')

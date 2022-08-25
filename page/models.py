@@ -6,6 +6,7 @@ from .mixins import Positioned, Timestamped, Named
 class Board(Positioned, Timestamped, Named):
     description = models.TextField(default="", blank=True)
     user = models.ForeignKey(User, related_name="boards", on_delete=models.CASCADE)
+    hidden = models.BooleanField(default=False)
 
     @property
     def bookmark_group_count(self):
