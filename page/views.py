@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from .models import Board, BookmarkGroup, Bookmark
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from .helpers import enumerate_boards
 
 # Create your views here.
 
@@ -131,5 +132,7 @@ def reorder_boards_by_one(request, pk, new_position):
 
     board_to_change_order.save()
     board_to_have_order_changed.save()
+
+    enumerate_boards(request.user)
 
     return redirect('home')

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from .mixins import Positioned, Timestamped, Named
+from .helpers import enumerate_boards
 
 
 class Board(Positioned, Timestamped, Named):
@@ -11,6 +12,11 @@ class Board(Positioned, Timestamped, Named):
     @property
     def bookmark_group_count(self):
         return self.bookmark_groups.count()
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            enumerate_boards(self.user)
+        super().save(*args, *kwargs)
 
 
 class BookmarkGroup(Positioned, Timestamped, Named):

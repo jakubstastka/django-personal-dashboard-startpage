@@ -6,6 +6,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for user in User.objects.all():
-            for index, board in enumerate(user.boards.all()):
+            for index, board in enumerate(user.boards.all(), start=1):
                 board.position = index
                 board.save()
