@@ -6,7 +6,7 @@ class Positioned(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ('position',)
+        ordering = ('-position',)
 
 
 class Timestamped(models.Model):

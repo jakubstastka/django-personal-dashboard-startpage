@@ -109,3 +109,27 @@ def unhide_board(request, pk):
         user_board.save()
 
     return redirect('home')
+
+
+@login_required
+def reorder_boards_by_one(request, pk, new_position):
+
+    user_boards = Board.objects.filter(user=request.user)
+    board_to_change_order = user_boards.get(pk=pk)
+    board_to_change_order_position = board_to_change_order.position
+
+    if new_position == "up":
+        board_to_have_order_changed = user_boards.get(position=board_to_change_order_position+1)
+
+        board_to_change_order.position += 1
+        board_to_have_order_changed.position -= 1
+    else:
+        board_to_have_order_changed = user_boards.get(position=board_to_change_order_position-1)
+
+        board_to_change_order.position -= 1
+        board_to_have_order_changed.position += 1
+
+    board_to_change_order.save()
+    board_to_have_order_changed.save()
+
+    return redirect('home')
