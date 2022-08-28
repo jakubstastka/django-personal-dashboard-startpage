@@ -57,6 +57,7 @@ class Board(Positioned, Timestamped, Named):
     user = models.ForeignKey(User, related_name="boards", on_delete=models.CASCADE)
     hidden = models.BooleanField(default=False)
     color = models.TextField(choices=COLOR_CHOICES, default=NEUTRAL)
+    bookmarks_color = models.TextField(choices=COLOR_CHOICES, default=NEUTRAL)
 
     def get_colors(self):
         return sorted(self.COLOR_CHOICES)
@@ -64,6 +65,10 @@ class Board(Positioned, Timestamped, Named):
     @property
     def get_current_color(self):
         return self.color.capitalize()
+
+    @property
+    def get_current_bookmark_color(self):
+        return self.bookmarks_color.capitalize()
 
     @property
     def bookmark_group_count(self):
