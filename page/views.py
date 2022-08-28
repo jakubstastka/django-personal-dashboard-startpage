@@ -42,7 +42,7 @@ class BoardCreateView(LoginRequiredMixin, CreateView):
 
 class BoardUpdateView(LoginRequiredMixin, UpdateView):
     model = Board
-    fields = ['name', 'description']
+    fields = ['name', 'description', 'color']
     success_url = reverse_lazy('home')
 
 

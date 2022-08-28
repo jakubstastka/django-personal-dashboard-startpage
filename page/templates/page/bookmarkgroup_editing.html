@@ -9,10 +9,10 @@
 {% if user.is_authenticated %}
     {% include 'page/navbar.html' %}
     <div class="mt-4">
-        <div class="bg-white shadow-lg rounded-lg border-slate-600">
+        <div class="bg-white shadow-lg rounded-lg border-{{ object.board.color }}-600">
             <div class="px-5 py-2">
                 <div class="flex justify-center">
-                    <div class="w-1/2 mb-4 relative p-1 border-b-2 border-emerald-600 bg-emerald-600/25 rounded-lg text-center text-emerald-800 text-md">{{ object.name }}</div>
+                    <div class="w-1/2 mb-4 relative p-1 border-b-2 border-{{ object.board.color }}-600 bg-{{ object.board.color }}-600/25 rounded-lg text-center text-{{ object.group.color }}-800 text-md">{{ object.name }}</div>
                 </div>
                 {% for bookmark in object.bookmarks.all %}
                     <div class="flex space-x-2 justify-center pb-2">
