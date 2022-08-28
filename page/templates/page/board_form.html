@@ -24,7 +24,7 @@
                         <div><input type="name" class="border-solid border-b-2 border-{{ object.color }}-600 rounded-lg text-center block mb-2 text-md font-medium text-{{ object.color }}-900" name="name" placeholder="Board Name" value="{{object.name}}" required></div>
                         <div><input type="description" class="border-solid border-b-2 border-{{ object.color }}-600 rounded-lg text-center block mb-2 text-md font-medium text-{{ object.color }}-900" name="description" placeholder="Board Description" value="{{object.description}}"></div>
                         <div>
-                            <select name="color" class="text-{{ object.color }}-900 text-center bg-white border-solid border-b-2 border-{{ object.color }}-600 rounded-lg">
+                            <select name="color" class="mb-2 text-{{ object.color }}-900 text-center bg-white border-solid border-b-2 border-{{ object.color }}-600 rounded-lg">
                                 <option value={{ object.color }} selected>{{ object.get_current_color }}</option>
                                 <option disabled>-----</option>
                                 {% for color_pair in object.get_colors %}
@@ -33,7 +33,7 @@
                             </select>
                         </div>
                         <div>
-                            <select name="bookmarks_color" class="text-{{ object.color }}-900 text-center bg-white border-solid border-b-2 border-{{ object.color }}-600 rounded-lg">
+                            <select name="bookmarks_color" class="mb-2 text-{{ object.color }}-900 text-center bg-white border-solid border-b-2 border-{{ object.color }}-600 rounded-lg">
                                 <option value={{ object.bookmarks_color }} selected>{{ object.get_current_bookmark_color }}</option>
                                 <option disabled>-----</option>
                                 {% for color_pair in object.get_colors %}
