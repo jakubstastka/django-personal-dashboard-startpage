@@ -20,7 +20,7 @@
                             <div>
                                 <button class="text-black font-small rounded-lg text-sm text-center inline-flex items-center" type="button" data-dropdown-toggle="boarddropdown{{ object.pk }}"><i class="fas fa-cog"></i></button>
                                 <!-- Dropdown menu -->
-                                <div class="hidden bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4" id="boarddropdown{{ object.pk }}">
+                                <div class="hidden bg-white text-base z-50 list-none divide-y divide-slate-100 rounded shadow my-4" id="boarddropdown{{ object.pk }}">
                                     <ul class="p-4 text-sm space-y-4" aria-labelledby="boarddropdown{{ object.pk }}">
                                         <li>
                                             <a href="{% url 'unhide-board' object.pk %}"><i class="fas fa-eye mr-2"></i>Unhide Board</a>
@@ -43,7 +43,7 @@
                             <div>
                                 <button class="text-black font-small rounded-lg text-sm text-center inline-flex items-center" type="button" data-dropdown-toggle="boarddropdown{{ object.pk }}"><i class="fas fa-cog"></i></button>
                                 <!-- Dropdown menu -->
-                                <div class="hidden bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4" id="boarddropdown{{ object.pk }}">
+                                <div class="hidden bg-white text-base z-50 list-none divide-y divide-slate-100 rounded shadow my-4" id="boarddropdown{{ object.pk }}">
                                     <ul class="p-4 text-sm space-y-4" aria-labelledby="boarddropdown{{ object.pk }}">
                                         {% if not forloop.first %}
                                         <li>
@@ -83,7 +83,7 @@
                                         <div class="flex space-x-2 justify-center">
                                             <a href="{% url 'update-bookmark' bookmark.id %}"><i class="fas fa-pen text-xs"></i></a>
                                             <a href="{{ bookmark.url }}" target="_blank">
-                                                <button type="button" class="inline-block p-1 border-b-2 border-gray-400 text-sm rounded-lg bg-gray-200 hover:bg-gray-600 hover:text-white">{{ bookmark.name }}</button>
+                                                <button type="button" class="inline-block p-1 border-b-2 border-slate-400 text-sm rounded-lg bg-slate-200 hover:bg-slate-600 hover:text-white">{{ bookmark.name }}</button>
                                             </a>
                                             <a href="{% url 'delete-bookmark' bookmark.id %}"><i class="fas fa-trash-alt text-xs"></i></a>
                                         </div>
@@ -100,11 +100,11 @@
         {% endif %}
 
         {% empty %}
-            <div class="text-2xl text-center text-gray-600">Oh, look, it's all empty. Perhaps create a board?</div>
+            <div class="text-2xl text-center text-slate-600">Oh, look, it's all empty. Perhaps create a board?</div>
         {% endfor %}
 
-        <div class="border-dashed border rounded-lg border-gray-600">
-            <div class="p-1 rounded-lg text-center text-gray-600 text-xl"><a href="{% url 'add-board' %}"><i class="fas fa-plus-circle"></i></a></div>
+        <div class="border-dashed border rounded-lg border-slate-600">
+            <div class="p-1 rounded-lg text-center text-slate-600 text-xl"><a href="{% url 'add-board' %}"><i class="fas fa-plus-circle"></i></a></div>
         </div>
 
     </div>

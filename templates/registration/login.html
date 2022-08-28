@@ -2,13 +2,13 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 
-<div class="text-4xl text-center text-gray-600 pt-6">Log In To Your StartPage</div>
+<div class="text-4xl text-center text-slate-600 pt-6">Log In To Your StartPage</div>
     <form method="post">
         {% csrf_token %}
         <div class="space-y-2 text-center pt-6">
             <div class="flex flex-col items-center justify-center">
-                <div><input type="input" class="text-center block mb-2 text-md font-medium text-gray-900 dark:text-gray-300" name="username" id="inputEmail" placeholder="Username" required></div>
-                <div><input type="password" class="text-center block mb-2 text-md font-medium text-gray-900 dark:text-gray-300" name="password" id="inputPass" placeholder="Password" required></div>
+                <div><input type="input" class="text-center block mb-2 text-md font-medium text-slate-900 dark:text-slate-300" name="username" id="inputEmail" placeholder="Username" required></div>
+                <div><input type="password" class="text-center block mb-2 text-md font-medium text-slate-900 dark:text-slate-300" name="password" id="inputPass" placeholder="Password" required></div>
             </div>
             <button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Log In</button>
         </div>

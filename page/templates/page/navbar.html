@@ -1,4 +1,4 @@
-<nav class="relative w-full flex flex-wrap items-center justify-between py-3 bg-gray-100 text-gray-500 rounded-lg shadow-lg">
+<nav class="relative w-full flex flex-wrap items-center justify-between py-3 bg-slate-100 text-slate-500 rounded-lg shadow-lg">
   <div class="container-fluid w-full flex flex-wrap items-justify justify-between px-6">
     <div class="container-fluid">
         <a class="text-2xl font-extrabold text-black" href="{% url 'home' %}">Start Page</a>
@@ -6,16 +6,16 @@
       <div>
           <button class="text-black font-small rounded-lg text-sm text-center inline-flex items-center" type="button" data-dropdown-toggle="dropdown">{{ user.username }} <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
             <!-- Dropdown menu -->
-            <div class="hidden bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4" id="dropdown">
+            <div class="hidden bg-white text-base z-50 list-none divide-y divide-slate-100 rounded shadow my-4" id="dropdown">
                 <ul class="py-1" aria-labelledby="dropdown">
                     <li>
-                      <span class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-300" href="#">Settings</span>
+                      <span class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-300" href="#">Settings</span>
                     </li>
                     <li>
-                      <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100" href="{% url 'password_change' %}">Change Password</a>
+                      <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700 hover:bg-slate-100" href="{% url 'password_change' %}">Change Password</a>
                     </li>
                     <li>
-                      <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100" href="{% url 'logout' %}">Log out</a>
+                      <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700 hover:bg-slate-100" href="{% url 'logout' %}">Log out</a>
                     </li>
                 </ul>
             </div>
