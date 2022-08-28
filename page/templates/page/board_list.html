@@ -96,18 +96,19 @@
                                                     <a href="{% url 'delete-bookmark-group' group.id %}"> <i class="fas fa-trash-alt text-xs mr-2"></i>Delete Bookmark Group</a>
                                                 </li>
                                                 <li>
+                                                    <a href="{% url 'edit-bookmark-group' group.id %}"> <i class="fas fa-wrench mr-2"></i>Edit Bookmarks</a>
+                                                </li>
+                                                <li>
                                                     <a href="{% url 'add-bookmark' group.id %}"><i class="fas fa-plus-circle mr-2"></i>Add Bookmark</a>
                                                 </li>
                                             </ul>
                                         </div>
                                 </div>
                                     {% for bookmark in group.bookmarks.all %}
-                                        <div class="flex space-x-2 justify-center">
-                                            <a href="{% url 'update-bookmark' bookmark.id %}"><i class="fas fa-pen text-xs"></i></a>
+                                        <div class="space-x-2 text-center">
                                             <a href="{{ bookmark.url }}" target="_blank">
                                                 <button type="button" class="inline-block p-1 border-b-2 border-slate-400 text-sm rounded-lg bg-slate-200 hover:bg-slate-600 hover:text-white">{{ bookmark.name }}</button>
                                             </a>
-                                            <a href="{% url 'delete-bookmark' bookmark.id %}"><i class="fas fa-trash-alt text-xs"></i></a>
                                         </div>
                                     {% endfor %}
                             </div>

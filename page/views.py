@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models import Count
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from .models import Board, BookmarkGroup, Bookmark
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -90,6 +91,11 @@ class BookmarkUpdateView(LoginRequiredMixin, UpdateView):
 class BookmarkDeleteView(LoginRequiredMixin, DeleteView):
     model = Bookmark
     success_url = reverse_lazy('home')
+
+
+class BookmarkGroupDetailView(LoginRequiredMixin, DetailView):
+    model = BookmarkGroup
+    template_name = "page/bookmarkgroup_editing.html"
 
 
 @login_required
