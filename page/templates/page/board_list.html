@@ -78,7 +78,24 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pt-4 gap-6 ">
                         {% for group in object.bookmark_groups.all %}
                             <div class="space-y-2">
-                                <div class="p-1 border-b-2 border-emerald-600 bg-emerald-600/25 rounded-lg text-center text-emerald-800 text-md"><a href="{% url 'update-bookmark-group' group.id %}"> <i class="fas fa-pen text-xs"></i> </a>{{ group.name }} <a href="{% url 'delete-bookmark-group' group.id %}"> <i class="fas fa-trash-alt text-xs"></i> </a></div>
+                                <div class="relative p-1 border-b-2 border-emerald-600 bg-emerald-600/25 rounded-lg text-center text-emerald-800 text-md">{{ group.name }}
+                                    <div class="absolute bottom-1 right-2">
+                                        <button class="font-small rounded-lg text-sm text-center inline-flex items-center" type="button" data-dropdown-toggle="boardgroupdropdown{{ group.pk }}">
+                                            <i class="fas fa-cog"></i>
+                                        </button>
+                                    </div>
+                                        <!-- Dropdown menu -->
+                                        <div class="text-base text-slate-900 hidden bg-white z-50 list-none rounded shadow my-4" id="boardgroupdropdown{{ group.pk }}">
+                                            <ul class="whitespace-nowrap text-left p-4 text-sm space-y-4" aria-labelledby="boardgroupdropdown{{ group.pk }}">
+                                                <li>
+                                                    <a href="{% url 'update-bookmark-group' group.id %}"><i class="fas fa-pen text-xs mr-2"></i>Rename Bookmark Group</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'delete-bookmark-group' group.id %}"> <i class="fas fa-trash-alt text-xs mr-2"></i>Delete Bookmark Group</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                </div>
                                     {% for bookmark in group.bookmarks.all %}
                                         <div class="flex space-x-2 justify-center">
                                             <a href="{% url 'update-bookmark' bookmark.id %}"><i class="fas fa-pen text-xs"></i></a>
