@@ -43,31 +43,31 @@
                         <div class="flex flex-wrap items-center justify-between">
                         <div class="text-2xl font-bold text-{{ object.color }}-600">{{ object.name }} </div>
                             <div>
-                                <button class="text-{{ object.color }}-600 font-small rounded-lg text-sm text-center inline-flex items-center" type="button" data-dropdown-toggle="boarddropdown{{ object.pk }}"><i class="fas fa-cog"></i></button>
+                                <button class="font-small rounded-lg text-sm text-center inline-flex items-center" type="button" data-dropdown-toggle="boarddropdown{{ object.pk }}"><i class="fas fa-cog"></i></button>
                                 <!-- Dropdown menu -->
                                 <div class="hidden bg-white text-base z-50 list-none divide-y divide-slate-100 rounded shadow my-4" id="boarddropdown{{ object.pk }}">
                                     <ul class="p-4 text-sm space-y-4" aria-labelledby="boarddropdown{{ object.pk }}">
                                         {% if not forloop.first %}
                                         <li>
-                                            <a href="{% url 'reorder-boards-by-one' object.pk 'up' %}"><i class="fas fa-arrow-circle-up mr-2"></i>Move Board Up</a>
+                                            <a href="{% url 'reorder-boards-by-one' object.pk 'up' %}"><i class="fas fa-arrow-circle-up mr-2 text-{{ object.color }}-600"></i>Move Board Up</a>
                                         </li>
                                         {% endif %}
                                         {% if not forloop.last %}
                                         <li>
-                                            <a href="{% url 'reorder-boards-by-one' object.pk 'down' %}"><i class="fas fa-arrow-circle-down mr-2"></i>Move Board Down</a>
+                                            <a href="{% url 'reorder-boards-by-one' object.pk 'down' %}"><i class="fas fa-arrow-circle-down mr-2text-{{ object.color }}-600"></i>Move Board Down</a>
                                         </li>
                                         {% endif %}
                                         <li>
-                                            <a href="{% url 'hide-board' object.pk %}"><i class="fas fa-eye-slash mr-2"></i>Hide Board</a>
+                                            <a href="{% url 'hide-board' object.pk %}"><i class="fas fa-eye-slash mr-2 text-{{ object.color }}-600"></i>Hide Board</a>
                                         </li>
                                         <li>
-                                          <a href="{% url 'update-board' object.pk %}"><i class="fas fa-pen mr-2"></i>Edit Board</a>
+                                          <a href="{% url 'update-board' object.pk %}"><i class="fas fa-pen mr-2 text-{{ object.color }}-600"></i>Edit Board</a>
                                         </li>
                                         <li>
-                                          <a href="{% url 'delete-board' object.pk %}"><i class="fas fa-trash-alt mr-2"></i>Delete Board</a>
+                                          <a href="{% url 'delete-board' object.pk %}"><i class="fas fa-trash-alt mr-2 text-{{ object.color }}-600"></i>Delete Board</a>
                                         </li>
                                         <li>
-                                          <a href="{% url 'add-bookmark-group' object.pk %}"><i class="fas fa-plus-circle mr-2"></i>Add New Group</a>
+                                          <a href="{% url 'add-bookmark-group' object.pk %}"><i class="fas fa-plus-circle mr-2 text-{{ object.color }}-600"></i>Add New Group</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -90,16 +90,16 @@
                                         <div class="text-base text-slate-900 hidden bg-white z-50 list-none rounded shadow my-4" id="boardgroupdropdown{{ group.pk }}">
                                             <ul class="whitespace-nowrap text-left p-4 text-sm space-y-4" aria-labelledby="boardgroupdropdown{{ group.pk }}">
                                                 <li>
-                                                    <a href="{% url 'update-bookmark-group' group.id %}"><i class="fas fa-pen text-xs mr-2"></i>Rename Bookmark Group</a>
+                                                    <a href="{% url 'update-bookmark-group' group.id %}"><i class="fas fa-pen text-xs mr-2 text-{{ object.color }}-600"></i>Rename Bookmark Group</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{% url 'delete-bookmark-group' group.id %}"> <i class="fas fa-trash-alt text-xs mr-2"></i>Delete Bookmark Group</a>
+                                                    <a href="{% url 'delete-bookmark-group' group.id %}"> <i class="fas fa-trash-alt text-xs mr-2 text-{{ object.color }}-600"></i>Delete Bookmark Group</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{% url 'edit-bookmark-group' group.id %}"> <i class="fas fa-wrench mr-2"></i>Edit Bookmarks</a>
+                                                    <a href="{% url 'edit-bookmark-group' group.id %}"> <i class="fas fa-wrench mr-2 text-{{ object.color }}-600"></i>Edit Bookmarks</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{% url 'add-bookmark' group.id %}"><i class="fas fa-plus-circle mr-2"></i>Add Bookmark</a>
+                                                    <a href="{% url 'add-bookmark' group.id %}"><i class="fas fa-plus-circle mr-2 text-{{ object.color }}-600"></i>Add Bookmark</a>
                                                 </li>
                                             </ul>
                                         </div>
