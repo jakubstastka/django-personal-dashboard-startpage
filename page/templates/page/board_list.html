@@ -54,7 +54,7 @@
                                         {% endif %}
                                         {% if not forloop.last %}
                                         <li>
-                                            <a href="{% url 'reorder-boards-by-one' object.pk 'down' %}"><i class="fas fa-arrow-circle-down mr-2text-{{ object.color }}-600"></i>Move Board Down</a>
+                                            <a href="{% url 'reorder-boards-by-one' object.pk 'down' %}"><i class="fas fa-arrow-circle-down mr-2 text-{{ object.color }}-600"></i>Move Board Down</a>
                                         </li>
                                         {% endif %}
                                         <li>
