@@ -20,12 +20,12 @@
                         <div class="flex flex-wrap items-center justify-between">
                         <div class="text-2xl font-bold text-{{ object.color }}-600">{{ object.name }} </div>
                             <div>
-                                <button class="text-black font-small rounded-lg text-sm text-center inline-flex items-center" type="button" data-dropdown-toggle="boarddropdown{{ object.pk }}"><i class="fas fa-cog"></i></button>
+                                <button class="text-{{ object.color }}-600 font-small rounded-lg text-sm text-center inline-flex items-center" type="button" data-dropdown-toggle="boarddropdown{{ object.pk }}"><i class="fas fa-cog"></i></button>
                                 <!-- Dropdown menu -->
                                 <div class="hidden bg-white text-base z-50 list-none divide-y divide-slate-100 rounded shadow my-4" id="boarddropdown{{ object.pk }}">
                                     <ul class="p-4 text-sm space-y-4" aria-labelledby="boarddropdown{{ object.pk }}">
                                         <li>
-                                            <a href="{% url 'unhide-board' object.pk %}"><i class="fas fa-eye mr-2"></i>Unhide Board</a>
+                                            <a href="{% url 'unhide-board' object.pk %}"><i class="fas fa-eye mr-2 text-{{ object.color }}-600"></i>Unhide Board</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -43,7 +43,7 @@
                         <div class="flex flex-wrap items-center justify-between">
                         <div class="text-2xl font-bold text-{{ object.color }}-600">{{ object.name }} </div>
                             <div>
-                                <button class="text-black font-small rounded-lg text-sm text-center inline-flex items-center" type="button" data-dropdown-toggle="boarddropdown{{ object.pk }}"><i class="fas fa-cog"></i></button>
+                                <button class="text-{{ object.color }}-600 font-small rounded-lg text-sm text-center inline-flex items-center" type="button" data-dropdown-toggle="boarddropdown{{ object.pk }}"><i class="fas fa-cog"></i></button>
                                 <!-- Dropdown menu -->
                                 <div class="hidden bg-white text-base z-50 list-none divide-y divide-slate-100 rounded shadow my-4" id="boarddropdown{{ object.pk }}">
                                     <ul class="p-4 text-sm space-y-4" aria-labelledby="boarddropdown{{ object.pk }}">
