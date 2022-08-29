@@ -6,6 +6,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
+
+from .enums import BoardColor
 from .models import Board, BookmarkGroup, Bookmark
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .helpers import enumerate_boards
@@ -32,18 +34,28 @@ class BoardList(LoginRequiredMixin, ListView):
 
 class BoardCreateView(LoginRequiredMixin, CreateView):
     model = Board
-    fields = ['name']
+    fields = ['name', 'description', 'color', 'bookmarks_color']
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['board_colors_choices'] = BoardColor.COLOR_CHOICES
+        return context
+
 
 class BoardUpdateView(LoginRequiredMixin, UpdateView):
     model = Board
     fields = ['name', 'description', 'color', 'bookmarks_color']
     success_url = reverse_lazy('home')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['board_colors_choices'] = BoardColor.COLOR_CHOICES
+        return context
 
 
 class BoardDeleteView(LoginRequiredMixin, DeleteView):

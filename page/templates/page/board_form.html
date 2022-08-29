@@ -27,7 +27,7 @@
                             <select name="color" class="mb-2 text-{{ object.color }}-900 text-center bg-white border-solid border-b-2 border-{{ object.color }}-600 rounded-lg">
                                 <option value={{ object.color }} selected>{{ object.get_current_color }}</option>
                                 <option disabled>-----</option>
-                                {% for color_pair in object.get_colors %}
+                                {% for color_pair in board_colors_choices %}
                                     <option value={{ color_pair.0 }}>{{ color_pair.1 }}</option>
                                 {% endfor %}
                             </select>
@@ -36,7 +36,7 @@
                             <select name="bookmarks_color" class="mb-2 text-{{ object.color }}-900 text-center bg-white border-solid border-b-2 border-{{ object.color }}-600 rounded-lg">
                                 <option value={{ object.bookmarks_color }} selected>{{ object.get_current_bookmark_color }}</option>
                                 <option disabled>-----</option>
-                                {% for color_pair in object.get_colors %}
+                                {% for color_pair in board_colors_choices %}
                                     <option value={{ color_pair.0 }}>{{ color_pair.1 }}</option>
                                 {% endfor %}
                             </select>
