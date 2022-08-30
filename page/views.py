@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.db.models import Count
+from django.db.models import Count, F
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
@@ -229,3 +230,15 @@ def reorder_bookmarks_by_one(request, bookmark_pk, new_position):
     enumerate_bookmarks(item_to_change_order.bookmark_group)
 
     return redirect('edit-bookmark-group', pk=group_to_filter_within.pk)
+
+
+@login_required
+def export_bookmarks(request):
+    bookmarks = Bookmark.objects.filter(bookmark_group__board__user=request.user).annotate(bookmark_group_name=F("bookmark_group__name"), board_name=F("bookmark_group__board__name")).values("name", "url", "bookmark_group_name", "board_name")
+
+    response = HttpResponse(bookmarks, headers={
+        'Content-Type': 'application/json',
+        'Content-Disposition': 'attachment; filename="bookmarks.txt"',
+    })
+
+    return response
