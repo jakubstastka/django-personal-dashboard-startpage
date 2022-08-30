@@ -59,10 +59,20 @@ class BoardUpdateView(LoginRequiredMixin, UpdateView):
         context['board_colors_choices'] = BoardColor.COLOR_CHOICES
         return context
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(board__user=self.request.user)
+        return queryset
+
 
 class BoardDeleteView(LoginRequiredMixin, DeleteView):
     model = Board
     success_url = reverse_lazy('home')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
 
 
 class BookmarkGroupCreateView(LoginRequiredMixin, CreateView):
@@ -70,13 +80,18 @@ class BookmarkGroupCreateView(LoginRequiredMixin, CreateView):
     fields = ['name']
     success_url = reverse_lazy('home')
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(board__user=self.request.user)
+        return queryset
+
     def form_valid(self, form):
         form.instance.board = Board.objects.get(pk=self.kwargs["pk"])
         return super().form_valid(form)
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['board_color'] = BookmarkGroup.objects.get(pk=self.kwargs["pk"]).board.color
+        context['board_color'] = Board.objects.get(pk=self.kwargs["pk"]).color
         return context
 
 
@@ -90,16 +105,31 @@ class BookmarkGroupUpdateView(LoginRequiredMixin, UpdateView):
         context['board_color'] = BookmarkGroup.objects.get(pk=self.kwargs["pk"]).board.color
         return context
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(board__user=self.request.user)
+        return queryset
+
 
 class BookmarkGroupDeleteView(LoginRequiredMixin, DeleteView):
     model = BookmarkGroup
     success_url = reverse_lazy('home')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(board__user=self.request.user)
+        return queryset
 
 
 class BookmarkCreateView(LoginRequiredMixin, CreateView):
     model = Bookmark
     fields = ['name', 'url']
     success_url = reverse_lazy('home')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(bookmark_group__board__user=self.request.user)
+        return queryset
 
     def form_valid(self, form):
         form.instance.bookmark_group = BookmarkGroup.objects.get(pk=self.kwargs["pk"])
@@ -121,10 +151,20 @@ class BookmarkUpdateView(LoginRequiredMixin, UpdateView):
         context['bookmark_color'] = BookmarkGroup.objects.get(pk=self.kwargs["pk"]).board.bookmarks_color
         return context
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(bookmark_group__board__user=self.request.user)
+        return queryset
+
 
 class BookmarkDeleteView(LoginRequiredMixin, DeleteView):
     model = Bookmark
     success_url = reverse_lazy('home')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(bookmark_group__board__user=self.request.user)
+        return queryset
 
 
 class BookmarkGroupDetailView(LoginRequiredMixin, DetailView):
@@ -140,6 +180,11 @@ class BookmarkGroupDetailView(LoginRequiredMixin, DetailView):
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
     template_name = "page/account_settings.html"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(pk=self.request.user.pk)
+        return queryset
 
 
 @login_required

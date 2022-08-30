@@ -2,7 +2,7 @@ from django.urls import path
 from .views import BoardList, BoardCreateView, BoardDeleteView, BoardUpdateView, BookmarkGroupCreateView, \
     BookmarkCreateView, BookmarkGroupDeleteView, BookmarkDeleteView, BookmarkGroupUpdateView, BookmarkUpdateView, \
     hide_board, unhide_board, reorder_boards_by_one, reorder_groups_by_one, reorder_bookmarks_by_one, \
-    BookmarkGroupDetailView, export_bookmarks
+    BookmarkGroupDetailView, export_bookmarks, UserDetailView
 
 urlpatterns = [
     path('', BoardList.as_view(), name='home'),
@@ -21,5 +21,6 @@ urlpatterns = [
     path('move/board/<int:pk>/<str:new_position>', reorder_boards_by_one, name='reorder-boards-by-one'),
     path('move/bookmarkgroup/<int:bookmark_group_pk>/<str:new_position>/', reorder_groups_by_one, name='reorder-groups-by-one'),
     path('move/bookmark/<int:bookmark_pk>/<str:new_position>', reorder_bookmarks_by_one, name='reorder-bookmark-by-one'),
-    path('export', export_bookmarks, name='export')
+    path('export/', export_bookmarks, name='export'),
+    path('settings/<int:pk>', UserDetailView.as_view(), name='user-settings'),
 ]
