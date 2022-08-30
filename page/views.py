@@ -61,7 +61,7 @@ class BoardUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = queryset.filter(board__user=self.request.user)
+        queryset = queryset.filter(user=self.request.user)
         return queryset
 
 
