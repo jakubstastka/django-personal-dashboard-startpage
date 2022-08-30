@@ -1,0 +1,1 @@
+journalctl --unit=gunicorn-startpage | tail -n 300
