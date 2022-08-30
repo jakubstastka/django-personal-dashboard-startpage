@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from .mixins import Positioned, Timestamped, Named
-from .helpers import enumerate_boards
+from .helpers import enumerate_boards, enumerate_groups
 from .enums import BoardColor
 
 
@@ -41,8 +41,18 @@ class BookmarkGroup(Positioned, Timestamped, Named):
     def bookmark_count(self):
         return self.bookmarks.count()
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            enumerate_groups(self.board)
+        super().save(*args, *kwargs)
+
 
 class Bookmark(Positioned, Timestamped, Named):
     url = models.URLField(default="")
     bookmark_group = models.ForeignKey(BookmarkGroup, related_name="bookmarks", on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            enumerate_groups(self.bookmark_group)
+        super().save(*args, *kwargs)
 
