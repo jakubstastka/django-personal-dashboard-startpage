@@ -5,6 +5,17 @@ from .helpers import enumerate_boards, enumerate_groups
 from .enums import BoardColor
 
 
+class AccountSettings(models.Model):
+    user = models.OneToOneField(User, related_name="account_settings", on_delete=models.CASCADE)
+
+    @property
+    def object_count(self):
+        boards = Board.objects.filter(user=self.user).count()
+        groups = BookmarkGroup.objects.filter(board__user=self.user).count()
+        bookmarks = Bookmark.objects.filter(bookmark_group__board__user=self.user).count()
+        return boards + groups + bookmarks
+
+
 class Board(Positioned, Timestamped, Named):
     description = models.TextField(default="", blank=True)
     user = models.ForeignKey(User, related_name="boards", on_delete=models.CASCADE)
