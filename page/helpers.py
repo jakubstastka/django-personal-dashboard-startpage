@@ -5,6 +5,12 @@ def enumerate_boards(user):
 
 
 def enumerate_groups(board):
-    for index, group in enumerate(board.boards.all().order_by("position"), start=1):
+    for index, group in enumerate(board.bookmark_groups.all().order_by("position"), start=1):
         group.position = index
         group.save()
+
+
+def enumerate_bookmarks(bookmarkgroup):
+    for index, bookmark in enumerate(bookmarkgroup.bookmarks.all().order_by("position"), start=1):
+        bookmark.position = index
+        bookmark.save()

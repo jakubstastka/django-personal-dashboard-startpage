@@ -10,7 +10,7 @@ from django.views.generic.list import ListView
 from .enums import BoardColor
 from .models import Board, BookmarkGroup, Bookmark
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .helpers import enumerate_boards, enumerate_groups
+from .helpers import enumerate_boards, enumerate_groups, enumerate_bookmarks
 
 
 # Create your views here.
@@ -181,7 +181,7 @@ def reorder_boards_by_one(request, pk, new_position):
 def reorder_groups_by_one(request, bookmark_group_pk, new_position):
     user_items = BookmarkGroup.objects.filter(board__user=request.user)
 
-    item_to_change_order = BookmarkGroup.objects.get(pk=bookmark_group_pk)
+    item_to_change_order = user_items.get(pk=bookmark_group_pk)
     item_to_change_order_position = item_to_change_order.position
 
     if new_position == "up":
@@ -198,11 +198,33 @@ def reorder_groups_by_one(request, bookmark_group_pk, new_position):
     item_to_change_order.save()
     item_to_have_order_changed.save()
 
-    enumerate_groups(request.user)
+    enumerate_groups(item_to_change_order.board)
 
     return redirect('home')
 
 
-@login_required()
-def reorder_bookmarks_by_one():
-    pass
+@login_required
+def reorder_bookmarks_by_one(request, bookmark_pk, new_position):
+    user_items = Bookmark.objects.filter(bookmark_group__board__user=request.user)
+
+    item_to_change_order = user_items.get(pk=bookmark_pk)
+    group_to_filter_within = item_to_change_order.bookmark_group
+    item_to_change_order_position = item_to_change_order.position
+
+    if new_position == "up":
+        item_to_have_order_changed = user_items.filter(bookmark_group=group_to_filter_within).get(position=item_to_change_order_position + 1)
+
+        item_to_change_order.position += 1
+        item_to_have_order_changed.position -= 1
+    else:
+        item_to_have_order_changed = user_items.filter(bookmark_group=group_to_filter_within).get(position=item_to_change_order_position - 1)
+
+        item_to_change_order.position -= 1
+        item_to_have_order_changed.position += 1
+
+    item_to_change_order.save()
+    item_to_have_order_changed.save()
+
+    enumerate_bookmarks(item_to_change_order.bookmark_group)
+
+    return redirect('edit-bookmark-group', pk=group_to_filter_within.pk)

@@ -19,5 +19,5 @@ urlpatterns = [
     path('bookmark/<int:pk>/delete/', BookmarkDeleteView.as_view(), name='delete-bookmark'),
     path('move/board/<int:pk>/<str:new_position>', reorder_boards_by_one, name='reorder-boards-by-one'),
     path('move/bookmarkgroup/<int:bookmark_group_pk>/<str:new_position>/', reorder_groups_by_one, name='reorder-groups-by-one'),
-    path('move/board/<int:board_pk>/bookmarkgroup/<int:bookmark_group_pk>/<str:new_position>/<int:pk>', reorder_bookmarks_by_one, name='reorder-bookmark-by-one'),
+    path('move/bookmark/<int:bookmark_pk>/<str:new_position>', reorder_bookmarks_by_one, name='reorder-bookmark-by-one'),
 ]

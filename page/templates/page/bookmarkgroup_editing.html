@@ -12,19 +12,29 @@
         <div class="bg-white shadow-lg rounded-lg border-{{ object.board.color }}-600">
             <div class="px-5 py-2">
                 <div class="flex justify-center">
-                    <div class="w-1/2 mb-4 relative p-1 border-b-2 border-{{ object.board.color }}-600 bg-{{ object.board.color }}-600/25 rounded-lg text-center text-{{ object.group.color }}-800 text-md">{{ object.name }}</div>
+                    <div class="w-1/2 mb-4 relative p-1 border-b-2 border-{{ object.board.color }}-600 bg-{{ object.board.color }}-600/25 rounded-lg text-center text-{{ object.board.color }}-800 text-md">{{ object.name }}</div>
                 </div>
+
                 {% for bookmark in object.bookmarks.all %}
                     <div class="flex space-x-2 justify-center pb-2">
-                        <a href="{% url 'update-bookmark' bookmark.id %}"><i class="fas fa-pen text-xs"></i></a>
-                        <a href="{% url 'reorder-items-by-one' bookmark.pk 'up' 'bookmark'%}"><i class="fas fa-arrow-circle-up text-{{ object.color }}-600"></i></a>
-                        <a href="{{ bookmark.url }}" target="_blank">
+                        <div><a href="{% url 'update-bookmark' bookmark.id %}"><i class="fas fa-pen text-xs"></i></a></div>
+                        {% if not forloop.first %}
+                        <div><a href="{% url 'reorder-bookmark-by-one' bookmark.pk 'up' %}"><i class="fas fa-arrow-circle-up text-{{ object.color }}-600"></i></a></div>
+                        {% else %}
+                        <div><i class="fas fa-arrow-circle-up text-gray-200"></i></div>
+                        {% endif %}
+                        <div><a href="{{ bookmark.url }}" target="_blank">
                             <button type="button" class="inline-block p-1 border-b-2 border-{{ object.board.bookmarks_color }}-400 text-sm rounded-lg bg-{{ object.board.bookmarks_color }}-200 hover:bg-{{ object.board.bookmarks_color }}-600 hover:text-white">{{ bookmark.name }}</button>
-                        </a>
-                        <a href="{% url 'reorder-items-by-one' bookmark.pk 'down' 'bookmark'%}"><i class="fas fa-arrow-circle-down text-{{ object.color }}-600"></i></a>
-                        <a href="{% url 'delete-bookmark' bookmark.id %}"><i class="fas fa-trash-alt text-xs"></i></a>
+                        </a></div>
+                        {% if not forloop.last %}
+                        <div><a href="{% url 'reorder-bookmark-by-one' bookmark.pk 'down' %}"><i class="fas fa-arrow-circle-down text-{{ object.color }}-600"></i></a></div>
+                        {% else %}
+                        <div><i class="fas fa-arrow-circle-down text-gray-200"></i></div>
+                        {% endif %}
+                        <div><a href="{% url 'delete-bookmark' bookmark.id %}"><i class="fas fa-trash-alt text-xs"></i></a></div>
                     </div>
                 {% endfor %}
+
                 <div class="text-center">
                     <a href="{% url 'add-bookmark' object.id %}"><i class="fas fa-plus-circle mr-2"></i></a>
                 </div>
