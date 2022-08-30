@@ -148,7 +148,7 @@ class BookmarkUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['bookmark_color'] = BookmarkGroup.objects.get(pk=self.kwargs["pk"]).board.bookmarks_color
+        context['bookmark_color'] = Bookmark.objects.get(pk=self.kwargs["pk"]).bookmark_group.board.bookmarks_color
         return context
 
     def get_queryset(self):
