@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import BoardList, BoardCreateView, BoardDeleteView, BoardUpdateView, BookmarkGroupCreateView, \
     BookmarkCreateView, BookmarkGroupDeleteView, BookmarkDeleteView, BookmarkGroupUpdateView, BookmarkUpdateView, \
-    hide_board, unhide_board, reorder_boards_by_one, BookmarkGroupDetailView
+    hide_board, unhide_board, reorder_items_by_one, BookmarkGroupDetailView
 
 urlpatterns = [
     path('', BoardList.as_view(), name='home'),
@@ -10,7 +10,7 @@ urlpatterns = [
     path('board/<int:pk>/delete/', BoardDeleteView.as_view(), name='delete-board'),
     path('board/<int:pk>/hide/', hide_board, name='hide-board'),
     path('board/<int:pk>/unhide/', unhide_board, name='unhide-board'),
-    path('board/<int:pk>/move/<str:new_position>/', reorder_boards_by_one, name='reorder-boards-by-one'),
+    path('move/<int:pk>/<str:new_position>/<str:item>', reorder_items_by_one, name='reorder-items-by-one'),
     path('bookmarkgroup/<int:pk>/create/', BookmarkGroupCreateView.as_view(), name='add-bookmark-group'),
     path('bookmarkgroup/<int:pk>/update/', BookmarkGroupUpdateView.as_view(), name='update-bookmark-group'),
     path('bookmarkgroup/<int:pk>/delete/', BookmarkGroupDeleteView.as_view(), name='delete-bookmark-group'),

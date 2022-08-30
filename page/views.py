@@ -151,25 +151,32 @@ def unhide_board(request, pk):
 
 
 @login_required
-def reorder_boards_by_one(request, pk, new_position):
+def reorder_items_by_one(request, pk, new_position, item):
+    user_items = None
 
-    user_boards = Board.objects.filter(user=request.user)
-    board_to_change_order = user_boards.get(pk=pk)
-    board_to_change_order_position = board_to_change_order.position
+    if item == "board":
+        user_items = Board.objects.filter(user=request.user)
+    elif item == "group":
+        user_items = BookmarkGroup.objects.filter(board__user=request.user)
+    elif item == "bookmark":
+        user_items = Bookmark.objects.filter(bookmark_group__board__user=request.user)
+
+    item_to_change_order = user_items.get(pk=pk)
+    item_to_change_order_position = item_to_change_order.position
 
     if new_position == "up":
-        board_to_have_order_changed = user_boards.get(position=board_to_change_order_position+1)
+        item_to_have_order_changed = user_items.get(position=item_to_change_order_position+1)
 
-        board_to_change_order.position += 1
-        board_to_have_order_changed.position -= 1
+        item_to_change_order.position += 1
+        item_to_have_order_changed.position -= 1
     else:
-        board_to_have_order_changed = user_boards.get(position=board_to_change_order_position-1)
+        item_to_have_order_changed = user_items.get(position=item_to_change_order_position-1)
 
-        board_to_change_order.position -= 1
-        board_to_have_order_changed.position += 1
+        item_to_change_order.position -= 1
+        item_to_have_order_changed.position += 1
 
-    board_to_change_order.save()
-    board_to_have_order_changed.save()
+    item_to_change_order.save()
+    item_to_have_order_changed.save()
 
     enumerate_boards(request.user)
 

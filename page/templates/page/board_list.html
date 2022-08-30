@@ -49,12 +49,12 @@
                                     <ul class="p-4 text-sm space-y-4" aria-labelledby="boarddropdown{{ object.pk }}">
                                         {% if not forloop.first %}
                                         <li>
-                                            <a href="{% url 'reorder-boards-by-one' object.pk 'up' %}"><i class="fas fa-arrow-circle-up mr-2 text-{{ object.color }}-600"></i>Move Board Up</a>
+                                            <a href="{% url 'reorder-items-by-one' object.pk 'up' 'board'%}"><i class="fas fa-arrow-circle-up mr-2 text-{{ object.color }}-600"></i>Move Board Up</a>
                                         </li>
                                         {% endif %}
                                         {% if not forloop.last %}
                                         <li>
-                                            <a href="{% url 'reorder-boards-by-one' object.pk 'down' %}"><i class="fas fa-arrow-circle-down mr-2 text-{{ object.color }}-600"></i>Move Board Down</a>
+                                            <a href="{% url 'reorder-items-by-one' object.pk 'down' 'board'%}"><i class="fas fa-arrow-circle-down mr-2 text-{{ object.color }}-600"></i>Move Board Down</a>
                                         </li>
                                         {% endif %}
                                         <li>
@@ -89,6 +89,16 @@
                                         <!-- Dropdown menu -->
                                         <div class="text-base text-slate-900 hidden bg-white z-50 list-none rounded shadow my-4" id="boardgroupdropdown{{ group.pk }}">
                                             <ul class="whitespace-nowrap text-left p-4 text-sm space-y-4" aria-labelledby="boardgroupdropdown{{ group.pk }}">
+                                                {% if not forloop.first %}
+                                                <li>
+                                                    <a href="{% url 'reorder-items-by-one' group.pk 'up' 'group'%}"><i class="fas fa-arrow-circle-up mr-2 text-{{ object.color }}-600"></i>Move Group Up</a>
+                                                </li>
+                                                {% endif %}
+                                                {% if not forloop.last %}
+                                                <li>
+                                                    <a href="{% url 'reorder-items-by-one' group.pk 'down' 'group'%}"><i class="fas fa-arrow-circle-down mr-2 text-{{ object.color }}-600"></i>Move Group Down</a>
+                                                </li>
+                                                {% endif %}
                                                 <li>
                                                     <a href="{% url 'update-bookmark-group' group.id %}"><i class="fas fa-pen text-xs mr-2 text-{{ object.color }}-600"></i>Rename Bookmark Group</a>
                                                 </li>
