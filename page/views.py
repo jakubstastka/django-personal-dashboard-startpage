@@ -72,11 +72,21 @@ class BookmarkGroupCreateView(LoginRequiredMixin, CreateView):
         form.instance.board = Board.objects.get(pk=self.kwargs["pk"])
         return super().form_valid(form)
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['board_color'] = BookmarkGroup.objects.get(pk=self.kwargs["pk"]).board.color
+        return context
+
 
 class BookmarkGroupUpdateView(LoginRequiredMixin, UpdateView):
     model = BookmarkGroup
     fields = ['name']
     success_url = reverse_lazy('home')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['board_color'] = BookmarkGroup.objects.get(pk=self.kwargs["pk"]).board.color
+        return context
 
 
 class BookmarkGroupDeleteView(LoginRequiredMixin, DeleteView):
@@ -93,11 +103,21 @@ class BookmarkCreateView(LoginRequiredMixin, CreateView):
         form.instance.bookmark_group = BookmarkGroup.objects.get(pk=self.kwargs["pk"])
         return super().form_valid(form)
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['bookmark_color'] = BookmarkGroup.objects.get(pk=self.kwargs["pk"]).board.bookmarks_color
+        return context
+
 
 class BookmarkUpdateView(LoginRequiredMixin, UpdateView):
     model = Bookmark
     fields = ['name', 'url']
     success_url = reverse_lazy('home')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['bookmark_color'] = BookmarkGroup.objects.get(pk=self.kwargs["pk"]).board.bookmarks_color
+        return context
 
 
 class BookmarkDeleteView(LoginRequiredMixin, DeleteView):
