@@ -131,6 +131,16 @@ class BookmarkGroupDetailView(LoginRequiredMixin, DetailView):
     model = BookmarkGroup
     template_name = "page/bookmarkgroup_editing.html"
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+
+
+class UserDetailView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = "page/account_settings.html"
+
 
 @login_required
 def hide_board(request, pk):
