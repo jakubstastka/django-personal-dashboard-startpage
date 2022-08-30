@@ -17,9 +17,11 @@
                 {% for bookmark in object.bookmarks.all %}
                     <div class="flex space-x-2 justify-center pb-2">
                         <a href="{% url 'update-bookmark' bookmark.id %}"><i class="fas fa-pen text-xs"></i></a>
+                        <a href="{% url 'reorder-items-by-one' bookmark.pk 'up' 'bookmark'%}"><i class="fas fa-arrow-circle-up text-{{ object.color }}-600"></i></a>
                         <a href="{{ bookmark.url }}" target="_blank">
                             <button type="button" class="inline-block p-1 border-b-2 border-{{ object.board.bookmarks_color }}-400 text-sm rounded-lg bg-{{ object.board.bookmarks_color }}-200 hover:bg-{{ object.board.bookmarks_color }}-600 hover:text-white">{{ bookmark.name }}</button>
                         </a>
+                        <a href="{% url 'reorder-items-by-one' bookmark.pk 'down' 'bookmark'%}"><i class="fas fa-arrow-circle-down text-{{ object.color }}-600"></i></a>
                         <a href="{% url 'delete-bookmark' bookmark.id %}"><i class="fas fa-trash-alt text-xs"></i></a>
                     </div>
                 {% endfor %}

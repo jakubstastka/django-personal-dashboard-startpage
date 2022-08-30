@@ -10,7 +10,8 @@ from django.views.generic.list import ListView
 from .enums import BoardColor
 from .models import Board, BookmarkGroup, Bookmark
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .helpers import enumerate_boards
+from .helpers import enumerate_boards, enumerate_groups
+
 
 # Create your views here.
 
@@ -151,15 +152,8 @@ def unhide_board(request, pk):
 
 
 @login_required
-def reorder_items_by_one(request, pk, new_position, item):
-    user_items = None
-
-    if item == "board":
-        user_items = Board.objects.filter(user=request.user)
-    elif item == "group":
-        user_items = BookmarkGroup.objects.filter(board__user=request.user)
-    elif item == "bookmark":
-        user_items = Bookmark.objects.filter(bookmark_group__board__user=request.user)
+def reorder_boards_by_one(request, pk, new_position):
+    user_items = Board.objects.filter(user=request.user)
 
     item_to_change_order = user_items.get(pk=pk)
     item_to_change_order_position = item_to_change_order.position
@@ -181,3 +175,34 @@ def reorder_items_by_one(request, pk, new_position, item):
     enumerate_boards(request.user)
 
     return redirect('home')
+
+
+@login_required
+def reorder_groups_by_one(request, bookmark_group_pk, new_position):
+    user_items = BookmarkGroup.objects.filter(board__user=request.user)
+
+    item_to_change_order = BookmarkGroup.objects.get(pk=bookmark_group_pk)
+    item_to_change_order_position = item_to_change_order.position
+
+    if new_position == "up":
+        item_to_have_order_changed = user_items.get(position=item_to_change_order_position + 1)
+
+        item_to_change_order.position += 1
+        item_to_have_order_changed.position -= 1
+    else:
+        item_to_have_order_changed = user_items.get(position=item_to_change_order_position - 1)
+
+        item_to_change_order.position -= 1
+        item_to_have_order_changed.position += 1
+
+    item_to_change_order.save()
+    item_to_have_order_changed.save()
+
+    enumerate_groups(request.user)
+
+    return redirect('home')
+
+
+@login_required()
+def reorder_bookmarks_by_one():
+    pass
