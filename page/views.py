@@ -182,15 +182,16 @@ def reorder_groups_by_one(request, bookmark_group_pk, new_position):
     user_items = BookmarkGroup.objects.filter(board__user=request.user)
 
     item_to_change_order = user_items.get(pk=bookmark_group_pk)
+    board_to_filter_within = item_to_change_order.board
     item_to_change_order_position = item_to_change_order.position
 
     if new_position == "up":
-        item_to_have_order_changed = user_items.get(position=item_to_change_order_position + 1)
+        item_to_have_order_changed = user_items.filter(board=board_to_filter_within).get(position=item_to_change_order_position + 1)
 
         item_to_change_order.position += 1
         item_to_have_order_changed.position -= 1
     else:
-        item_to_have_order_changed = user_items.get(position=item_to_change_order_position - 1)
+        item_to_have_order_changed = user_items.filter(board=board_to_filter_within).get(position=item_to_change_order_position - 1)
 
         item_to_change_order.position -= 1
         item_to_have_order_changed.position += 1
