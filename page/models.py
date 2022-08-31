@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from .mixins import Positioned, Timestamped, Named
-from .helpers import enumerate_boards, enumerate_groups
+from .helpers import enumerate_boards, enumerate_groups, enumerate_bookmarks
 from .enums import BoardColor
 
 
@@ -64,6 +64,6 @@ class Bookmark(Positioned, Timestamped, Named):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            enumerate_groups(self.bookmark_group)
+            enumerate_bookmarks(self.bookmark_group)
         super().save(*args, *kwargs)
 
