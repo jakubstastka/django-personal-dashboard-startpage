@@ -9,7 +9,7 @@
             <div class="hidden bg-white text-base z-50 list-none divide-y divide-slate-100 rounded shadow my-4" id="dropdown">
                 <ul class="py-1" aria-labelledby="dropdown">
                     <li>
-                      <span class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-300" href="#">Account</span>
+                      <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700" href="{% url 'user-account-settings' user.pk %}">Account</a>
                     </li>
                     <li>
                       <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700 hover:bg-slate-100" href="{% url 'password_change' %}">Change Password</a>

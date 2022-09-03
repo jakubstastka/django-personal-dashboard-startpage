@@ -22,5 +22,5 @@ urlpatterns = [
     path('move/bookmarkgroup/<int:bookmark_group_pk>/<str:new_position>/', reorder_groups_by_one, name='reorder-groups-by-one'),
     path('move/bookmark/<int:bookmark_pk>/<str:new_position>', reorder_bookmarks_by_one, name='reorder-bookmark-by-one'),
     path('export/', export_bookmarks, name='export'),
-    path('settings/<int:pk>', UserDetailView.as_view(), name='user-settings'),
+    path('settings/<int:pk>', UserDetailView.as_view(), name='user-account-settings'),
 ]
