@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -292,9 +294,11 @@ def reorder_bookmarks_by_one(request, bookmark_pk, new_position):
 def export_bookmarks(request):
     bookmarks = Bookmark.objects.filter(bookmark_group__board__user=request.user).annotate(bookmark_group_name=F("bookmark_group__name"), board_name=F("bookmark_group__board__name")).values("name", "url", "bookmark_group_name", "board_name")
 
+    filename = request.user.username + datetime.datetime.now().strftime("-%m-%d-%Y-%H-%M-%S-")
+
     response = HttpResponse(bookmarks, headers={
         'Content-Type': 'application/json',
-        'Content-Disposition': 'attachment; filename="bookmarks.txt"',
+        'Content-Disposition': f'attachment; filename="{filename}bookmarks.txt"',
     })
 
     return response
