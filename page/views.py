@@ -97,12 +97,13 @@ class BookmarkGroupCreateView(LoginRequiredMixin, CreateView):
 
 class BookmarkGroupUpdateView(LoginRequiredMixin, UpdateView):
     model = BookmarkGroup
-    fields = ['name']
+    fields = ['name', 'board', 'moved']
     success_url = reverse_lazy('home')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['board_color'] = BookmarkGroup.objects.get(pk=self.kwargs["pk"]).board.color
+        context['user_board_choices'] = Board.objects.filter(user=self.request.user)
         return context
 
     def get_queryset(self):

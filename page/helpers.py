@@ -7,6 +7,7 @@ def enumerate_boards(user):
 def enumerate_groups(board):
     for index, group in enumerate(board.bookmark_groups.all().order_by("position"), start=1):
         group.position = index
+        group.moved = False
         group.save()
 
 

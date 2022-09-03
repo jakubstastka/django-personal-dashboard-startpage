@@ -47,13 +47,14 @@ class Board(Positioned, Timestamped, Named):
 
 class BookmarkGroup(Positioned, Timestamped, Named):
     board = models.ForeignKey(Board, related_name="bookmark_groups", on_delete=models.CASCADE)
+    moved = models.BooleanField(default=False)
 
     @property
     def bookmark_count(self):
         return self.bookmarks.count()
 
     def save(self, *args, **kwargs):
-        if not self.pk:
+        if not self.pk or self.moved:
             enumerate_groups(self.board)
         super().save(*args, *kwargs)
 
