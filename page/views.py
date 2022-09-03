@@ -97,7 +97,7 @@ class BookmarkGroupCreateView(LoginRequiredMixin, CreateView):
 
 class BookmarkGroupUpdateView(LoginRequiredMixin, UpdateView):
     model = BookmarkGroup
-    fields = ['name', 'board', 'moved']
+    fields = ['name', 'board', 'moved', 'position']
     success_url = reverse_lazy('home')
 
     def get_context_data(self, *args, **kwargs):
