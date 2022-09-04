@@ -14,4 +14,5 @@ def enumerate_groups(board):
 def enumerate_bookmarks(bookmarkgroup):
     for index, bookmark in enumerate(bookmarkgroup.bookmarks.all().order_by("position"), start=1):
         bookmark.position = index
+        bookmark.moved = False
         bookmark.save()
