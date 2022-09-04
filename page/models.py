@@ -62,9 +62,10 @@ class BookmarkGroup(Positioned, Timestamped, Named):
 class Bookmark(Positioned, Timestamped, Named):
     url = models.URLField(default="")
     bookmark_group = models.ForeignKey(BookmarkGroup, related_name="bookmarks", on_delete=models.CASCADE)
+    moved = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
-        if not self.pk:
+        if not self.pk or self.moved:
             enumerate_bookmarks(self.bookmark_group)
         super().save(*args, *kwargs)
 
