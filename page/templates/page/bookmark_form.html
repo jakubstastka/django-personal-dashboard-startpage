@@ -22,8 +22,8 @@
                     <div class="space-y-2 flex flex-col items-center justify-center">
                          {% if form.errors %}
                              <div class="m-3">
-                             {% for error in form.errors.values %}
-                                <div class="text-center block mb-2 text-md font-bold text-red-600">{{ error|escape }}</div>
+                             {% for key, error in form.errors.items %}
+                                <div class="text-center block mb-2 text-md font-bold text-red-600">There is an issue with this field {{ key }}: {{ error }}</div>
                              {% endfor %}
                              </div>
                          {% endif %}
